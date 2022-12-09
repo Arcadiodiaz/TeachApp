@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-head">Editar</div>
+    <div class="card-body">
+        <form class="space-y-4" [formGroup]="editForm" (ngSubmit)="onSubmit()" novalidate>
+            <div>
+                <label class="sr-only" for="name">Estudiante</label>
+                <input class="w-full rounded-lg border border-gray-300 p-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+                    placeholder="Estudiante" type="text" formControlName="Estudiante" required />
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                    <label class="sr-only" for="email">Asignatura</label>
+                    <input class="w-full rounded-lg border border-gray-300 p-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+                        placeholder="Asignatura" type="text" formControlName="Asignatura" required />
+                </div>
+
+                <div>
+                    <label class="sr-only" for="phone">Nota</label>
+                    <input class="w-full rounded-lg border border-gray-300 p-3 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+                        placeholder="Nota" type="number" formControlName="Nota" required />
+                </div>
+            </div>
+
+            <div class="mt-4 justify-end flex">
+                <button routerLink="/qualifications/show"
+                    class="cursor-pointer inline-flex w-full items-center justify-center rounded-lg bg-indigo-800 px-5 py-2.5 text-white sm:w-auto mr-2">
+                    <span class="font-medium"> Volver</span>
+                </button>
+                <button type="submit"
+                    class="inline-flex w-full items-end justify-end rounded-lg bg-green-800 px-5 py-2.5 text-white sm:w-auto">
+                    <span class="font-medium"> Actualizar </span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                            d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
