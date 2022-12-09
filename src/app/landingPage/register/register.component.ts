@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { user } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
 
 @Component({
   selector: 'app-register',
@@ -10,28 +13,50 @@ import { UserService } from 'src/app/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  formRegister: FormGroup;
+  registrarUsuario: FormGroup;
 
   constructor(
-    private userService: UserService,
-    private router: Router
+    private fb: FormBuilder,
+    private afAuth : AngularFireAuth,
+    private toastr: ToastrService,
+    private router: Router,
+    private firebaseError: FirebaseCodeErrorService
   ) {
-    this.formRegister = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
-    });
+    this.registrarUsuario= this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      repetirPassword: ['', Validators.required],
+    })
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  registrar(): void{
+    const email = this.registrarUsuario.value.email;
+    const password = this.registrarUsuario.value.password;
+    const repetirPassword = this.registrarUsuario.value.repetirPassword;
+    if(password !== repetirPassword){
+      this.toastr.error('Las contraseñas no coinciden', 'Error');
+      return;
+    }
+
+    this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
+      this.toastr.success('El usuario fue registrado con éxito', 'Usuario registrado');
+      this.router.navigate(['/login']);
+      console.log(user);
+      }).catch((error) => {
+        this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
+      })
+  }
+
+  /* onSubmit() {
     this.userService.register(this.formRegister.value)
       .then(response => {
         console.log(response);
         this.router.navigate(['/login']);
         })
       .catch(error => console.log(error));
-  }
+  } */
 
 }

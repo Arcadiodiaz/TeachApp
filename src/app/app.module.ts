@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Toast, ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { StudentsComponent } from './students/students.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HeaderComponent } from './header/header.component';
+import { HeaderLandingComponent } from './landingPage/header/header.component';
 
 import { OverlayModule } from "@angular/cdk/overlay";
 import { CdkMenuModule } from "@angular/cdk/menu";
@@ -30,6 +32,15 @@ import { EditComponent } from './qualifications/edit/edit.component';
 import { HomeComponent } from './landingPage/home/home.component';
 import { LoginComponent } from './landingPage/login/login.component';
 import { RegisterComponent } from './landingPage/register/register.component';
+import { FooterComponent } from './landingPage/footer/footer.component';
+import { ContactComponent } from './landingPage/contact/contact.component';
+import { PageComponent } from './landingPage/page/page.component';
+import { PageBodyComponent } from './landingPage/body/body.component';
+import { DashbodyComponent } from './dashbody/dashbody.component';
+import { PricingComponent } from './landingPage/pricing/pricing.component';
+import { ServicesComponent } from './landingPage/services/services.component';
+import { Error404Component } from './error404/error404.component';
+import { ForgotPasswordComponent } from './landingPage/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +57,22 @@ import { RegisterComponent } from './landingPage/register/register.component';
     EditComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderLandingComponent,
+    FooterComponent,
+    ContactComponent,
+    PageComponent,
+    PageBodyComponent,
+    DashbodyComponent,
+    PricingComponent,
+    ServicesComponent,
+    Error404Component,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     OverlayModule,
